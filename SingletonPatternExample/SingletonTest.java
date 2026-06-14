@@ -31,7 +31,7 @@ public class SingletonTest {
         Logger logger1 = Logger.getInstance();
         Logger logger2 = Logger.getInstance();
 
-        logger1.log("Application Started.");
+        logger1.log("Application Started..");
         logger2.log("Running Application...");
 
         if (logger1 == logger2) {
