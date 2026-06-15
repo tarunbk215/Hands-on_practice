@@ -25,3 +25,5 @@ Comparison between both,..
 - Both Linear and Binary Search are suitable for "Small Data",
 - But only Binary Search is optimal for "Large Data".
 - Since the Binary Search is optimal for large data but , it requires sorted data or sorting before applying the search agorithm.
+
+-Hence the Binary search is optimal when data is large and sorted!.
