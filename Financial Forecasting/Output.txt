@@ -1,0 +1,4 @@
+Present Value: Rs 10000.0
+Growth Rate: 10.0%
+Years: 5
+Future Value: Rs 16105.10
