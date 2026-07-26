@@ -1,0 +1,29 @@
+.stats-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.stat-card {
+  flex: 1;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+}
+.stat-value {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e2a44;
+}
+.stat-label {
+  color: #666;
+  font-size: 0.85rem;
+}
+.binding-demo {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 320px;
+}
