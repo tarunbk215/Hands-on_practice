@@ -1,0 +1,10 @@
+.course-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 220px;
+}
+.course-code {
+  color: #666;
+  font-size: 0.85rem;
+}
