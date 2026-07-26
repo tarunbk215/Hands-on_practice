@@ -1,0 +1,83 @@
+HANDS-ON 1 - Task 1: Notes on Generated Files
+==============================================
+
+angular.json
+  Workspace configuration file. Defines projects, build targets (build/serve/test),
+  file replacements, asset paths, style/script bundling, and production budgets.
+  The Angular CLI reads this to know how to build and serve the app.
+
+tsconfig.json
+  Root TypeScript configuration shared across the whole workspace (compiler options
+  like target, strict mode, module resolution). App and spec configs extend this one.
+
+tsconfig.app.json
+  TypeScript config specifically for the application source (excludes spec/test files).
+  Extends tsconfig.json and points to src/main.ts as the entry file.
+
+package.json
+  Lists npm dependencies (Angular packages, RxJS, zone.js) and devDependencies
+  (Angular CLI, TypeScript, Karma/Jasmine), plus npm scripts (ng serve, ng build, ng test).
+
+src/main.ts
+  Application entry point. Bootstraps the root standalone component (AppComponent)
+  with the application config (appConfig), which wires up providers like the router.
+
+src/app/app.config.ts
+  Standalone-app replacement for the old app.module.ts. Registers global providers:
+  provideRouter(routes), zone change detection, and global error listeners.
+
+src/app/app.component.ts
+  The root component of the application. Hosts the <router-outlet> where routed
+  pages render, and (after Task 2) the shared <app-header>.
+
+src/index.html
+  The single HTML page served to the browser. Contains the <app-root> element that
+  Angular bootstraps into, plus the page title and viewport meta tags.
+
+Task 1 - Step 4: ng build output (dist/student-course-portal/browser/)
+========================================================================
+  main-<hash>.js       -> contains ALL compiled application code (components,
+                           services, routes, templates) bundled together.
+  polyfills-<hash>.js  -> browser compatibility shims Angular needs (zone.js etc).
+  styles-<hash>.css    -> compiled global styles from src/styles.css.
+  index.html           -> the shell page, script tags injected automatically.
+  favicon.ico          -> copied from public/.
+The file with the compiled application code is main-<hash>.js.
+
+Task 1 - Step 5: Production Budgets (angular.json)
+===================================================
+Under architect > build > configurations > production > budgets, the "initial" bundle
+budget is set to:
+  maximumWarning: 500kB
+  maximumError: 1MB
+
+This means: if the initial JS bundle (main + polyfills) exceeds 500kB, the build
+still succeeds but the CLI prints a warning. If it exceeds 1MB, the production
+build FAILS with an error. This guards against unnoticed bundle bloat that would
+hurt page-load performance for end users.
+
+HANDS-ON 8 - Setup Note
+========================
+db.json (project root) is the mock backend data for json-server. Before
+running the app, start it in a separate terminal:
+  json-server --watch db.json --port 3000
+Then in another terminal: ng serve
+All CourseService/EnrollmentService HTTP calls target http://localhost:3000.
+
+HANDS-ON 10 - Running the tests
+================================
+This sandbox has no real headless Chrome available (only a non-functional
+snap stub), so `ng test` couldn't be executed here directly. All spec files
+were verified with `npx tsc -p tsconfig.spec.json --noEmit` (the same
+compile step Karma/Jasmine runs before executing tests), which passed with
+zero errors. Run `ng test` locally (or `ng test --code-coverage`) to execute
+them for real — Chrome DevTools/Chrome browser is required on your machine.
+
+HANDS-ON 10 - Follow-up fix
+============================
+Running `ng test` locally surfaced 8 failures: every spec file that was
+still the plain CLI-generated "should create" scaffold (never touched
+since the component/service was first created) didn't have the providers
+those components gained in later hands-ons — ActivatedRoute, Router
+(routerLink/RouterOutlet), Store (NgRx), or HttpClient. Every spec file
+across the project has been audited and fixed with the correct providers.
