@@ -1,0 +1,20 @@
+<h2>Course Listing</h2>
+
+<p *ngIf="isLoading">Loading courses...</p>
+
+<div class="course-grid" *ngIf="!isLoading">
+  <ng-container *ngIf="courses.length > 0; else noCourses">
+    <app-course-card
+      *ngFor="let course of courses; let i = index; trackBy: trackByCourseId"
+      appHighlight="lightblue"
+      [course]="course"
+      (enrollRequested)="onEnroll($event)"
+    ></app-course-card>
+  </ng-container>
+
+  <ng-template #noCourses>
+    <p>No courses available.</p>
+  </ng-template>
+</div>
+
+<p *ngIf="selectedCourseId">Selected course ID: {{ selectedCourseId }}</p>
