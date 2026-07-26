@@ -1,0 +1,50 @@
+.course-card {
+  border: 1px solid #ddd;
+  border-left: 4px solid transparent;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 220px;
+  transition: max-height 0.2s ease;
+}
+
+/* Step 29: ngClass-driven states */
+.course-card.card--enrolled {
+  background: #eefbf0;
+  border-color: #2e7d32;
+}
+.course-card.card--full {
+  box-shadow: inset 0 0 0 1px #f0ad4e;
+}
+.course-card.expanded {
+  min-height: 180px;
+}
+
+.course-code {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+}
+.badge--passed { background: green; }
+.badge--failed { background: red; }
+.badge--pending { background: grey; }
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.card-details {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #ccc;
+  font-size: 0.85rem;
+}

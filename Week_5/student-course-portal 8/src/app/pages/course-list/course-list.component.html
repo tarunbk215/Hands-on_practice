@@ -1,0 +1,34 @@
+<h2>Course Listing</h2>
+
+<!-- Step 71: search updates the URL query param -->
+<div class="search-row">
+  <label for="courseSearch">Search</label>
+  <input
+    id="courseSearch"
+    type="text"
+    [(ngModel)]="searchTerm"
+    (ngModelChange)="onSearchChange($event)"
+    placeholder="e.g. angular"
+  />
+</div>
+
+<p *ngIf="isLoading">Loading courses...</p>
+<p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+<div class="course-grid" *ngIf="!isLoading">
+  <ng-container *ngIf="courses.length > 0; else noCourses">
+    <div class="card-wrapper" *ngFor="let course of courses; let i = index; trackBy: trackByCourseId" (click)="goToDetail(course.id)">
+      <app-course-card
+        appHighlight="lightblue"
+        [course]="course"
+        (enrollRequested)="onEnroll($event)"
+      ></app-course-card>
+    </div>
+  </ng-container>
+
+  <ng-template #noCourses>
+    <p>No courses available.</p>
+  </ng-template>
+</div>
+
+<p *ngIf="selectedCourseId">Selected course ID: {{ selectedCourseId }}</p>
